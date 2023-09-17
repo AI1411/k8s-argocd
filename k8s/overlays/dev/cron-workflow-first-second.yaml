@@ -5,6 +5,7 @@ metadata:
 spec:
   schedule: "0 0 * * *"
   workflowSpec:
+    serviceAccountName: argo
     entrypoint: main
     templates:
       - name: main
