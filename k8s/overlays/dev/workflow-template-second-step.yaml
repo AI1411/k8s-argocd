@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: second-step-workflow-template
+spec:
+  entrypoint: main
+  templates:
+    - name: main
+      steps:
+        - - name: execute-second-step
+            template: second-step-job
+
+    - name: second-step-job
+      container:
+        name: second-step-container
+        image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/second-step

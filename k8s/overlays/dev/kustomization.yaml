@@ -1,6 +1,8 @@
 # k8s/overlays/dev/kustomization.yaml
 resources:
   - ../../base
+  - workflow-template-first-step.yaml
+  - workflow-template-second-step.yaml
 patches:
   - path: cronjob-first-step.yaml
   - path: cronjob-second-step.yaml

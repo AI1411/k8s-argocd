@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: first-step-workflow-template
+spec:
+  entrypoint: main
+  templates:
+    - name: main
+      steps:
+        - - name: execute-first-step
+            template: first-step-job
+
+    - name: first-step-job
+      container:
+        name: first-step-container
+        image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/first-step
