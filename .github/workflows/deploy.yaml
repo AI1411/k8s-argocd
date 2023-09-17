@@ -25,15 +25,3 @@ jobs:
       - name: Sync Batch App in ArgoCD
         run: |
           argocd app sync batch-app
-
-      - name: Install Argo Workflows CLI
-        run: |
-          curl -sLO https://github.com/argoproj/argo-workflows/releases/latest/download/argo-linux-amd64
-          chmod +x argo-linux-amd64
-          sudo mv argo-linux-amd64 /usr/local/bin/argo
-
-      - name: Submit All Argo Workflows
-        run: |
-          for workflow in k8s/overlays/dev/workflow-template-*.yaml; do
-            argo submit --watch $workflow
-          done
