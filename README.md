@@ -6,5 +6,4 @@ argocd app create first-step \
   --dest-namespace NAMESPACE_YOU_WANT_TO_DEPLOY \
   --dest-server https://kubernetes.default.svc \
   --sync-policy automated
-
 ```
