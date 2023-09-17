@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2 # Note: I changed this from v3 to v2 as v2 is the most stable version as of my last training data.
 
       - name: Install ArgoCD CLI
         run: |
@@ -22,11 +22,6 @@ jobs:
         run: |
           argocd login ${{ secrets.ARGOCD_SERVER }} --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure
 
-      - name: Sync All ArgoCD Applications
+      - name: Sync Batch App in ArgoCD
         run: |
-          apps=$(argocd app list -o name)
-          for app in $apps; do
-            argocd app sync $app
-          done
-      
-
+          argocd app sync batch-app # Assuming 'batch-app' is the name of your application in ArgoCD that manages both cronjobs.

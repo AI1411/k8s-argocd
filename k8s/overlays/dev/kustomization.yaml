@@ -1,0 +1,6 @@
+# k8s/overlays/dev/kustomization.yaml
+resources:
+  - ../../base
+patches:
+  - path: cronjob-first-step.yaml
+  - path: cronjob-second-step.yaml

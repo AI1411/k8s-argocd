@@ -1,0 +1,3 @@
+resources:
+  - cronjob-first-step.yaml
+  - cronjob-second-step.yaml
