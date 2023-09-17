@@ -3,6 +3,7 @@ resources:
   - ../../base
   - workflow-template-first-step.yaml
   - workflow-template-second-step.yaml
+  - cron-workflow-first-second.yaml
 patches:
   - path: cronjob-first-step.yaml
   - path: cronjob-second-step.yaml
