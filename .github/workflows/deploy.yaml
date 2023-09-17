@@ -22,9 +22,12 @@ jobs:
         run: |
           argocd login ${{ secrets.ARGOCD_SERVER }} --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure
 
-      - name: Sync Batch App in ArgoCD
+      - name: Sync Specific ArgoCD Applications
         run: |
-          argocd app sync batch-app
+          for file in cronjob-*.yaml; do
+            app_name=$(basename "$file" .yaml)  # Strip the '.yaml' to get the application name
+            argocd app sync "$app_name"
+          done
 
       - name: Install Argo Workflows CLI
         run: |
