@@ -10,3 +10,5 @@ spec:
       container:
         name: second-step-container
         image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/second-step
+        command:
+          - "./second-batch"
