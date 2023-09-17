@@ -1,9 +1,9 @@
-name: ArgoCD Deploy
+name: ArgoCD and ArgoWorkflow Deploy
 
 on:
   push:
     branches:
-      - main # or any other branch you want to trigger the workflow
+      - main
 
 jobs:
   deploy:
@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2 # Note: I changed this from v3 to v2 as v2 is the most stable version as of my last training data.
+        uses: actions/checkout@v2
 
       - name: Install ArgoCD CLI
         run: |
@@ -24,4 +24,16 @@ jobs:
 
       - name: Sync Batch App in ArgoCD
         run: |
-          argocd app sync batch-app # Assuming 'batch-app' is the name of your application in ArgoCD that manages both cronjobs.
+          argocd app sync batch-app
+
+      - name: Install Argo Workflows CLI
+        run: |
+          curl -sLO https://github.com/argoproj/argo-workflows/releases/latest/download/argo-linux-amd64
+          chmod +x argo-linux-amd64
+          sudo mv argo-linux-amd64 /usr/local/bin/argo
+
+      - name: Submit All Argo Workflows
+        run: |
+          for workflow in k8s/overlays/dev/workflow-template-*.yaml; do
+            argo submit --watch $workflow
+          done
