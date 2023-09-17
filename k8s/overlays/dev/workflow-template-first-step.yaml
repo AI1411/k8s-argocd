@@ -9,7 +9,3 @@ spec:
       container:
         name: first-step-container
         image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/first-step
-        command:
-          - /bin/sh
-          - -c
-          - "./first-batch"
