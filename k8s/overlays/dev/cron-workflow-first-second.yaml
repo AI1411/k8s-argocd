@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: combined-steps-cron
+spec:
+  schedule: "0 0 * * *"
+  workflowSpec:
+    entrypoint: main
+    templates:
+      - name: main
+        steps:
+          - - name: execute-first-step
+              templateRef:
+                name: first-step-workflow-template
+                template: first-step-job
+          - - name: execute-second-step
+              templateRef:
+                name: second-step-workflow-template
+                template: second-step-job
