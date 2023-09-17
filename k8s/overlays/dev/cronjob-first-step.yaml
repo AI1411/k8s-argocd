@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: first-step-cronjob
 spec:
-  schedule: "*/10 * * * *"  # 10分ごとに実行
+  schedule: "*/20 * * * *"  # 10分ごとに実行
   successfulJobsHistoryLimit: 3   # 成功したジョブの履歴を3つだけ保持
   failedJobsHistoryLimit: 1       # 失敗したジョブの履歴を1つだけ保持
   jobTemplate:
