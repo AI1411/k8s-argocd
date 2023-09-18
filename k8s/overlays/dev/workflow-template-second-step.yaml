@@ -4,11 +4,19 @@ metadata:
   name: second-step-workflow-template
 spec:
   entrypoint: main
+  arguments:
+    parameters:
+      - name: number
+        value: "5" # デフォルト値として5を設定
   templates:
     - name: second-step-job
       serviceAccountName: argo
+      inputs:
+        parameters:
+          - name: number
       container:
         name: second-step-container
         image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/second-step
         command:
           - "./second-batch"
+          - "-number={{inputs.parameters.number}}"
