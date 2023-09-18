@@ -18,7 +18,7 @@ spec:
         command:
           - /bin/sh
           - -c
-          - "/app/first-batch > /tmp/output.txt"
+          - "./first-batch > /tmp/output.txt"
       volumes:
         - name: tmp-storage
           emptyDir: {}
