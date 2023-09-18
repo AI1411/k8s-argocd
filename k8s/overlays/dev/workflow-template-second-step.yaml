@@ -4,10 +4,6 @@ metadata:
   name: second-step-workflow-template
 spec:
   entrypoint: second-step-job
-  arguments:
-    parameters:
-      - name: number
-        value: "5" # デフォルト値として5を設定
   templates:
     - name: second-step-job
       serviceAccountName: argo
