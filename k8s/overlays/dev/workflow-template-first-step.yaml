@@ -11,9 +11,9 @@ spec:
         parameters:
           - name: output-result
             valueFrom:
-              path: /tmp/output.txt
+              parameter: "{{tasks.first-step-job.outputs.parameters.output-result}}"
       container:
         name: first-step-container
         image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/first-step
         command:
-          - "./first-batch > /tmp/output.txt"
+          - "./first-batch"
