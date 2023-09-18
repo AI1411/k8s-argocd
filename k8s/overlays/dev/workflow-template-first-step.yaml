@@ -7,21 +7,8 @@ spec:
   templates:
     - name: first-step-job
       serviceAccountName: argo
-      outputs:
-        parameters:
-          - name: output-result
-            valueFrom:
-              path: /tmp/output.txt
       container:
         name: first-step-container
         image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/first-step
         command:
-          - /bin/sh
-          - -c
-          - "./first-batch > /tmp/output.txt"
-      volumes:
-        - name: tmp-storage
-          emptyDir: {}
-      volumeMounts:
-        - mountPath: /tmp
-          name: tmp-storage
+          - "./first-batch"
