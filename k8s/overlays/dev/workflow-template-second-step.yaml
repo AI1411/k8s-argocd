@@ -3,7 +3,7 @@ kind: WorkflowTemplate
 metadata:
   name: second-step-workflow-template
 spec:
-  entrypoint: main
+  entrypoint: second-step-job
   arguments:
     parameters:
       - name: number

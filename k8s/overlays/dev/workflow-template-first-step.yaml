@@ -3,7 +3,7 @@ kind: WorkflowTemplate
 metadata:
   name: first-step-workflow-template
 spec:
-  entrypoint: main
+  entrypoint: first-step-job
   templates:
     - name: first-step-job
       serviceAccountName: argo
@@ -16,9 +16,9 @@ spec:
         name: first-step-container
         image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/first-step
         command:
-          - sh
+          - /bin/sh
           - -c
-          - "./first-batch > /tmp/output.txt"
+          - "/app/first-batch > /tmp/output.txt"
       volumes:
         - name: tmp-storage
           emptyDir: {}
