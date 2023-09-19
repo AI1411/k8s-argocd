@@ -6,7 +6,7 @@ spec:
   entrypoint: first-step-job
   templates:
     - name: first-step-job
-      serviceAccountName: argo
+      serviceAccountName: argocd
       container:
         name: first-step-container
         image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/first-step

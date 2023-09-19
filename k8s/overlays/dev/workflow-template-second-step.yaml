@@ -6,7 +6,7 @@ spec:
   entrypoint: second-step-job
   templates:
     - name: second-step-job
-      serviceAccountName: argo
+      serviceAccountName: argocd
       container:
         name: second-step-container
         image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/second-step
