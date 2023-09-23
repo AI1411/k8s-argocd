@@ -12,5 +12,5 @@ spec:
         spec:
           containers:
             - name: first-step-container
-              image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/first-step
+              image: asia-northeast1-docker.pkg.dev/planet-4f7c6/argo/first-step
           restartPolicy: Never

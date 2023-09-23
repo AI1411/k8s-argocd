@@ -12,5 +12,5 @@ spec:
         spec:
           containers:
             - name: second-step-container
-              image: asia-northeast1-docker.pkg.dev/ai-project-d1f40/argo/second-step
+              image: asia-northeast1-docker.pkg.dev/planet-4f7c6/argo/second-step
           restartPolicy: Never
