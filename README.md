@@ -1,36 +1,26 @@
-### set project
+### argoCDの環境構築
 ```bash
-gcloud config set project {{projectID}}
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
-### get project
+### clusterの認証情報を確認
 ```bash
-gcloud config get-value project
+gcloud container clusters get-credentials [CLUSTER_NAME] --zone asia-northeast1 --project [PROJECT_ID]
 ```
 
-### create service account
+### externalIPでホスティング
 ```bash
-gcloud iam service-accounts create gke-argocd \
-  --description "used by tf" \
-  --display-name "gke-argocd"
-```
-
-### add credentials to service account
-```bash
-gcloud projects add-iam-policy-binding {{projectID}} \
-  --member serviceAccount:gke-argocd@{{projectID}}.iam.gserviceaccount.com \
-  --role roles/container.admin
-```
-
-### add credentials to gke
-```bash
-gcloud container clusters get-credentials gke-argocd --zone asia-northeast1 --project planet-4f7c6
-```
-
-### download credentials
-```bash
-gcloud iam service-accounts keys create ~/.config/gcloud/account.json \
-  --iam-account gke-argocd@planet-4f7c6.iam.gserviceaccount.com
+# ArgoCDのnamespaceに切り替え
+kubectl config set-context --current --namespace=argocd
+#　ArgoCD ServerのServiceをLoadBalancerに変更
+kubectl patch svc argocd-server -p '{"spec": {"type": "LoadBalancer"}}'
+# 外部IPの確認
+kubectl get svc argocd-server
+# ブラウザで開く
+open http://$(kubectl get svc argocd-server -n argocd -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+# 初期パスワード取得 初期usernameはadmin
+kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
 ### create app
@@ -38,7 +28,7 @@ gcloud iam service-accounts keys create ~/.config/gcloud/account.json \
 argocd app create first-step \
   --repo https://github.com/YOUR_REPO_URL.git \
   --path PATH_TO_YOUR_MANIFEST_DIRECTORY \
-  --dest-namespace NAMESPACE_YOU_WANT_TO_DEPLOY \
+  --dest-namespace.yaml NAMESPACE_YOU_WANT_TO_DEPLOY \
   --dest-server https://kubernetes.default.svc \
   --sync-policy automated
 ```

@@ -24,4 +24,4 @@ jobs:
 
       - name: Sync Batch App in ArgoCD
         run: |
-          argocd app sync batch
+          argocd app sync batch-app

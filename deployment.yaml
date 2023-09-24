@@ -10,7 +10,7 @@ spec:
       template:
         spec:
           containers:
-            - image: asia-northeast1-docker.pkg.dev/planet-4f7c6/argo/first-step
+            - image: asia-northeast1-docker.pkg.dev/planet-4f7c6/gke-argocd/first-step
               name: first-step-container
           restartPolicy: Never
   schedule: '* * * * *'
@@ -28,7 +28,7 @@ spec:
       template:
         spec:
           containers:
-            - image: asia-northeast1-docker.pkg.dev/planet-4f7c6/argo/second-step
+            - image: asia-northeast1-docker.pkg.dev/planet-4f7c6/gke-argocd/second-step
               name: second-step-container
           restartPolicy: Never
   schedule: '* * * * *'
